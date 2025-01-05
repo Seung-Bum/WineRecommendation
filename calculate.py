@@ -8,9 +8,15 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/calculate', methods=['POST'])
+@app.route('/calculate', methods=['GET'])
 def calculate():
     data = request.json
+    try:
+        num1 = float(data['num1'])
+        num2 = float(data['num2'])
+    except ValueError:
+        return jsonify({'error': 'Invalid number format'}), 400
+
     num1 = float(data.get('num1'))
     num2 = float(data.get('num2'))
     operation = data.get('operation')
