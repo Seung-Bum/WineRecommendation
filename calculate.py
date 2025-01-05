@@ -11,7 +11,8 @@ def index():
 # @app.route('/calculate')
 @app.route('/calculate', methods=['POST'])
 def calculate():
-    data = request.json
+    # data = request.json
+    data = request.get_json(force=True)
     try:
         num1 = float(data['num1'])
         num2 = float(data['num2'])
