@@ -8,7 +8,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/calculate', methods=['POST'])
+@app.route('/calculate', methods=['GET', 'POST'])
 def calculate():
     data = request.json
     num1 = float(data.get('num1'))
