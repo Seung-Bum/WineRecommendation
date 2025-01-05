@@ -8,23 +8,18 @@ def index():
     return render_template('index.html')
 
 
-# @app.route('/calculate')
-@app.route('/calculate', methods=['POST'])
+@app.route('/calculate', methods=['GET'])
 def calculate():
-    print(request.data)
-    print(request.headers)
+    print('headers: ' + str(request.headers))
+    print('data: ' + str(request.args))
 
-    data = request.json
     try:
-        num1 = float(data['num1'])
-        num2 = float(data['num2'])
-    except ValueError:
+        num1 = float(request.args.get('num1'))
+        num2 = float(request.args.get('num2'))
+    except (ValueError, TypeError):
         return jsonify({'error': 'Invalid number format'}), 400
-        # return render_template("report.html", result='Invalid number format')
 
-    num1 = float(data.get('num1'))
-    num2 = float(data.get('num2'))
-    operation = data.get('operation')
+    operation = request.args.get('operation')
 
     if operation == 'add':
         result = num1 + num2
@@ -35,14 +30,11 @@ def calculate():
     elif operation == 'divide':
         if num2 == 0:
             return jsonify({'error': 'Cannot divide by zero'}), 400
-            # return render_template("report.html", result='Cannot divide by zero')
         result = num1 / num2
     else:
         return jsonify({'error': 'Invalid operation'}), 400
-        # return render_template("report.html", result='Invalid operation')
 
     return jsonify({'result': result})
-    # return render_template("report.html", result=result)
 
 
 if __name__ == '__main__':
