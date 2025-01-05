@@ -11,8 +11,8 @@ def index():
 # @app.route('/calculate')
 @app.route('/calculate', methods=['POST'])
 def calculate():
-    print(request.data)  # 실제 요청 본문 출력
-    print(request.headers)  # 헤더 정보 출력
+    print(request.data)
+    print(request.headers)
 
     data = request.json
     try:
