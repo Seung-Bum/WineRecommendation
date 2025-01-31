@@ -4,7 +4,8 @@ import os
 
 def load_wine_data():
     # recommend.py와 같은 폴더에 위치한 경우
-    file_path = r"static\data\wine.txt"
+    # Windows에서는 static\data\wine.txt, Linux에서는 static/data/wine.txt로 자동 변환
+    file_path = os.path.join("static", "data", "wine.txt")
 
     if not os.path.exists(file_path):  # 파일이 존재하는지 확인
         print(f"[ERROR] file path not existence: {file_path}")
