@@ -1,44 +1,24 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, redirect, url_for, session
+from recommend import recommend_wine, load_wine_data
+from flask_cors import CORS
 
-app = Flask(__name__)
+
+app = Flask(__name__, static_folder="static")
+app.secret_key = "your_secret_key_here"  # 세션 사용을 위한 키 설정
+
+# JSON 데이터 불러오기
+wine_recommendations = load_wine_data()
+print(" * Wine Data load complated:", len(wine_recommendations))
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('main.html')
 
 
-@app.route('/calculate', methods=['GET'])
-def calculate():
-    print('headers: ' + str(request.headers))
-    print('data: ' + str(request.args))
+@app.route('/recommend', methods=['POST'])
+def recommend():
 
-    try:
-        num1 = float(request.args.get('num1'))
-        num2 = float(request.args.get('num2'))
-    except (ValueError, TypeError):
-        return jsonify({'error': 'Invalid number format'}), 400
-
-    operation = request.args.get('operation')
-
-    if operation == 'add':
-        result = num1 + num2
-    elif operation == 'subtract':
-        result = num1 - num2
-    elif operation == 'multiply':
-        result = num1 * num2
-    elif operation == 'divide':
-        if num2 == 0:
-            return jsonify({'error': 'Cannot divide by zero'}), 400
-        result = num1 / num2
-    else:
-        return jsonify({'error': 'Invalid operation'}), 400
-
-    return jsonify({'result': result})
-
-
-@app.route('/analyze', methods=['POST'])
-def analyze():
     # Content-Type 확인
     if request.content_type != 'application/json':
         return jsonify({"error": "Content-Type must be application/json"}), 400
@@ -49,9 +29,21 @@ def analyze():
         return jsonify({"error": "Invalid JSON data"}), 400
 
     # 받은 데이터 출력
-    print(f"Received data: {data}")
-    return jsonify({"message": "POST request received", "received": data})
+    print(f"Received Keyword: {data}")
+
+    response = recommend_wine(data, wine_recommendations)
+    print("response:", response)
+
+    session['response'] = response  # 세션에 저장
+    return jsonify({"redirect": "/result"})  # JSON 응답으로 리디렉트 URL 반환
+
+
+@app.route('/result')
+def result_page():
+    response = session.pop('response', "No data available")  # 세션에서 데이터 가져오기
+    return render_template('result.html', response=response)
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+CORS(app)
