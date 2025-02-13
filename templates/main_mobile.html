@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>와인 취향 찾기</title>
+    <style>    
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 10px;
+        text-align: center;
+        background-image: url('static/images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(33, 4, 23, 0.8);
+        z-index: -1;
+      }
+    
+      .container {
+        max-width: 95%;
+        background: white;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+        margin: auto;
+      }
+    
+      h1 {
+        color: rgb(255, 246, 246);
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+    
+      p {
+        font-weight: bold;
+        color: rgb(253, 255, 238);
+        text-align: center;
+        font-size: 1rem;
+        margin-bottom: 8px;
+      }
+    
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 12px;
+        width: 100%;
+      }
+    
+      .radio-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        padding: 5px;
+      }
+    
+      .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        width: 100%;
+        padding: 6px;
+        font-size: 1rem;
+      }
+    
+      input[type='radio'] {
+        margin-right: 6px;
+      }
+    
+      button {
+        font-weight: bold;
+        background-color: rgb(158, 0, 108);
+        color: white;
+        border: none;
+        padding: 14px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        max-width: 280px;
+      }
+    
+      button:hover {
+        background-color: rgb(219, 0, 150);
+      }
+    
+      /* 반응형 설정 */
+      @media (max-width: 768px) {
+        .container {
+          max-width: 100%;
+          padding: 10px;
+        }
+    
+        h1 {
+          font-size: 1.3rem;
+        }
+    
+        p {
+          font-size: 0.9rem;
+        }
+    
+        .radio-group label {
+          font-size: 0.9rem;
+        }
+    
+        button {
+          font-size: 0.9rem;
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🍷 와인 취향 찾기</h1>
+    <span>맞춤형 와인을 찾는데 도움이 됩니다</span>
+
+  <div class="form-container">
+    <form id="form1">
+      <p>1. 과일과 관련된 취향</p>
+      <div class="radio-group">
+        <label
+          ><input type="radio" name="fruit" value="strawberry" /> 딸기</label>
+        <label><input type="radio" name="fruit" value="apple" /> 사과</label>
+        <label><input type="radio" name="fruit" value="cherry" /> 체리</label>
+        <label
+          ><input type="radio" name="fruit" value="blackberry" />
+          블랙베리</label
+        >
+        <label><input type="radio" name="fruit" value="plum" /> 자두</label>
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form2">
+      <p>2. 평소 어떤 종류의 음식을 좋아하시나요?</p>
+      <div class="radio-group">
+        <label><input type="radio" name="food" value="steak" /> 스테이크</label>
+        <label><input type="radio" name="food" value="seafood" /> 해산물</label>
+        <label><input type="radio" name="food" value="cheese" /> 치즈</label>
+        <label><input type="radio" name="food" value="salad" /> 샐러드</label>
+        <label><input type="radio" name="food" value="dessert" /> 디저트</label>
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form3">
+      <p>
+        3. 강한 알코올 도수, 아니면 가벼운 도수를 좋아하시나요?
+      </p>
+      <div class="radio-group">
+        <label
+          ><input type="radio" name="proof" value="strong" /> 강한 도수</label
+        >
+        <label
+          ><input type="radio" name="proof" value="light" /> 가벼운 도수</label
+        >
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form4">
+      <p>4. 와인에서 어떤 느낌을 찾고 싶으신가요?</p>
+      <div class="radio-group">
+        <label
+          ><input type="radio" name="feel" value="diversion" /> 기분 전환</label
+        >
+        <label
+          ><input type="radio" name="feel" value="special" /> 특별한 자리</label
+        >
+        <label><input type="radio" name="feel" value="meal" /> 식사 보완</label>
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form5">
+      <p>
+        5. 진하고 강렬한 와인과 부드럽고 연한 와인 중 어떤 것이 끌리나요?
+      </p>
+      <div class="radio-group">
+        <label
+          ><input type="radio" name="texture" value="thick" /> 진하고 강렬한
+          와인</label
+        >
+        <label
+          ><input type="radio" name="texture" value="soft" /> 부드럽고 연한
+          와인</label
+        >
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form6">
+      <p>6. 와인 구매 시 어느 정도의 가격대를 선호하시나요?</p>
+      <div class="radio-group">
+        <label
+          ><input type="radio" name="budget" value="daily" /> 저렴한 일상용 와인
+          (만원 이하)</label
+        >
+        <label
+          ><input type="radio" name="budget" value="commonly" /> 적당한 가격대
+          (2~5만 원)</label
+        >
+        <label
+          ><input type="radio" name="budget" value="special" /> 특별한 날을 위한
+          고급 와인 (5만 원 이상)</label
+        >
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form7">
+      <p>7. 와인향 취향</p>
+      <div class="radio-group">
+        <label><input type="radio" name="smell" value="fruitsmell" /> 과일향</label>
+        <label><input type="radio" name="smell" value="flower" /> 꽃향</label>
+        <label><input type="radio" name="smell" value="wody" /> 나무향</label>
+        <label><input type="radio" name="smell" value="acrid" /> 매운향</label>
+      </div>
+    </form>
+  </div>
+  </br>
+    <button id="submitButton">제출</button>
+
+    <script>
+      document.getElementById('submitButton').addEventListener('click', () => {
+        // 모든 폼 데이터 수집
+        const forms = document.querySelectorAll('form');
+        const data = {};
+
+        forms.forEach((form) => {
+          const inputs = form.querySelectorAll('input[type="radio"]:checked');
+          inputs.forEach((input) => {
+            data[input.name] = input.value; // 각 폼의 이름과 선택된 값을 수집
+          });
+        });
+
+        console.log('수집된 데이터:', data);
+
+        // 서버로 데이터 전송
+        fetch('http://124.51.107.175:8080/recommend', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+        .then(response => {
+          if (response.ok) {
+              window.location.href = "/result";  // 성공하면 result.html 페이지로 이동
+          } else {
+              return response.json();  // 에러 메시지 처리
+          }
+        })
+        .then(data => {
+          if (data && data.error) {
+              alert("Error: " + data.error);
+          }
+        })
+        .catch(error => console.error("Error:", error));
+      });
+    </script>
+  </body>
+</html>

@@ -1,19 +1,44 @@
-from flask import Flask, request, render_template, jsonify, redirect, url_for, session
+import os
+from flask import Flask, request, render_template, jsonify, session
 from recommend import recommend_wine, load_wine_data
+from decryptKey import decrypt_secret_key
+from dotenv import load_dotenv
 from flask_cors import CORS
+from config import config
 
 
 app = Flask(__name__, static_folder="static")
-app.secret_key = "your_secret_key_here"  # 세션 사용을 위한 키 설정
 
-# JSON 데이터 불러오기
+# .env 파일 로드
+load_dotenv()
+
+# 환경 변수 가져오기
+encrypted_secret_key = os.getenv("ENCRYPTED_SECRET_KEY")
+decryption_key = os.getenv("DECRYPTION_KEY")
+
+# 복호화한 SECRET_KEY 적용
+app.secret_key = decrypt_secret_key(encrypted_secret_key, decryption_key)
+print(f" * Decrypted SECRET_KEY: {app.secret_key}")
+
+# 환경 변수에 따라 설정 적용
+# 기본값은 'development' (이 문장에서 FLASK_ENV가 환경변수를 가져오는 소스임)
+env = os.getenv("FLASK_ENV", "development")
+app.config.from_object(config[env])
+print(f" * FLASK_ENV: {env}")
+
+# WINE JSON 데이터 불러오기
 wine_recommendations = load_wine_data()
 print(" * Wine Data load complated:", len(wine_recommendations))
 
 
+@app.route("/config")
+def get_config():
+    return jsonify({"api_base_url": app.config["API_BASE_URL"]})
+
+
 @app.route('/')
 def index():
-    return render_template('main.html')
+    return render_template(f"main_{web_division()}.html")
 
 
 @app.route('/recommend', methods=['POST'])
@@ -41,9 +66,18 @@ def recommend():
 @app.route('/result')
 def result_page():
     response = session.pop('response', "No data available")  # 세션에서 데이터 가져오기
-    return render_template('result.html', response=response)
+    # 와인 종류에 따라 다른 데이터 나가게
+    return render_template(f"result_{web_division()}.html", response=response)
+
+
+def web_division():
+    user_agent = request.headers.get('User-Agent', '').lower()
+    if "mobile" in user_agent or "android" in user_agent or "iphone" in user_agent:
+        return "mobile"
+    else:
+        return "web"
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-CORS(app)
+CORS(app)  # 다른 도메인에서 오는 요청을 Flask 서버가 허용할 수 있도록 설정하는 역할
