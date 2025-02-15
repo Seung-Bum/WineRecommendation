@@ -18,7 +18,7 @@ decryption_key = os.getenv("DECRYPTION_KEY")
 
 # 복호화한 SECRET_KEY 적용
 app.secret_key = decrypt_secret_key(encrypted_secret_key, decryption_key)
-print(f" * Decrypted SECRET_KEY: {app.secret_key}")
+# print(f" * Decrypted SECRET_KEY: {app.secret_key}")
 
 # 환경 변수에 따라 설정 적용
 # 기본값은 'development' (이 문장에서 FLASK_ENV가 환경변수를 가져오는 소스임)
@@ -38,7 +38,7 @@ def get_config():
 
 @app.route('/')
 def index():
-    return render_template(f"main_{web_division()}.html")
+    return render_template("main_web.html")
 
 
 @app.route('/recommend', methods=['POST'])
@@ -67,7 +67,7 @@ def recommend():
 def result_page():
     response = session.pop('response', "No data available")  # 세션에서 데이터 가져오기
     # 와인 종류에 따라 다른 데이터 나가게
-    return render_template(f"result_{web_division()}.html", response=response)
+    return render_template("result_web.html", response=response)
 
 
 def web_division():
