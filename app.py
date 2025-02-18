@@ -78,14 +78,6 @@ def result_page():
     return render_template("result_web.html", response=response)
 
 
-# def web_division():
-#     user_agent = request.headers.get('User-Agent', '').lower()
-#     if "mobile" in user_agent or "android" in user_agent or "iphone" in user_agent:
-#         return "mobile"
-#     else:
-#         return "web"
-
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=(env == "development"))
 CORS(app)  # 다른 도메인에서 오는 요청을 Flask 서버가 허용할 수 있도록 설정하는 역할
