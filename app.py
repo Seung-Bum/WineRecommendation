@@ -87,5 +87,5 @@ def result_page():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=port, debug=(env == "development"))
+    app.run(host='0.0.0.0', port=5000, debug=(env == "development"))
 CORS(app)  # 다른 도메인에서 오는 요청을 Flask 서버가 허용할 수 있도록 설정하는 역할
