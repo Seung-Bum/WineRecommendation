@@ -1,13 +1,13 @@
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f8f8f8;
-  margin: 0;
-  padding: 20px;
-  text-align: center;
-  background-image: url('../images/background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 body::before {
