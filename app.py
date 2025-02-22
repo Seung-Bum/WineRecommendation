@@ -75,7 +75,7 @@ def recommend():
 
 @app.route('/result')
 def result_page():
-    response = session.pop('response', "No data available")  # 세션에서 데이터 가져오기
+    response = session.get('response', "No data available")  # 세션에서 데이터 가져오기
     return render_template("result_web.html", response=response)
 
 
