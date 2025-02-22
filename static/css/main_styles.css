@@ -1,0 +1,289 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(33, 4, 23, 0.8);
+    z-index: -1;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+  
+  .container {
+    max-width: 90%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+  }
+  
+  h1 {
+    color: rgb(255, 246, 246);
+    font-size: 2vw;
+    margin-bottom: 3px;
+  }
+  
+  form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 13vh;
+  }
+  
+  p {
+    font-weight: bold;
+    color: rgb(253, 255, 238);
+    text-align: center;
+    font-size: 1.2vw;
+    margin-bottom: 10px;
+  }
+  
+  span {
+    font-weight: bold;
+    color: rgb(254, 255, 247);
+    opacity: 0.7;
+    font-size: 0.8vw;
+  }
+  
+  .radio-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* 작은 화면에서는 줄바꿈 허용 */
+  }
+
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1vw;
+  }
+  
+  input[type='radio'] {
+    margin-right: 5px;
+  }
+  
+  .form-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1px;
+  }
+
+  #form1 {
+    margin-top: 30px;
+  }
+  
+  #form7 {
+    margin-bottom: 60px;
+  }
+  
+  label {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s, border-color 0.3s;
+    font-size: 1vw;
+  }
+  
+  button {
+    font-weight: bold;
+    background-color: rgb(158, 0, 108);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2vw;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 20%;
+    max-width: 250px;
+  }
+
+  button:hover {
+    background-color: rgb(219, 0, 150);
+  }
+
+  #submitButton {
+    width: 10%;
+  }
+  
+/* 반응형 설정 */
+@media (max-width: 1024px) { 
+    .radio-group {
+      display: flex;
+      flex-direction: column; /* 세로 정렬 */
+      justify-content: center;
+      align-items: center;
+      gap: 10px; /* 항목 간 간격 조정 */
+      flex-wrap: wrap; /* 작은 화면에서는 줄바꿈 */
+    }
+
+    .radio-group label {
+      display: block !important;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      transition: background-color 0.3s, border-color 0.3s;
+      min-width: 200px;  /* 최소 너비를 가장 긴 텍스트 기준으로 설정 */
+      max-width: 250px;  /* 너무 길어지는 걸 방지 */
+      text-align: center;
+      flex-grow: 1; /* 동일한 너비로 확장 */
+    }
+
+    #submitButton {
+      width: 20% !important;
+      font-size: 1.45vw !important;
+    }
+
+    h1 {
+      color: rgb(255, 246, 246);
+      font-size: 4vw;
+      margin-bottom: 3px;
+    }
+
+    form {
+      height: auto !important;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #form7 {
+      margin-bottom: 50px !important;
+    }
+
+    span {
+      font-weight: bold;
+      color: rgb(254, 255, 247);
+      opacity: 0.7;
+      font-size: 1.4vw;
+    }
+
+    p {
+      font-weight: bold;
+      color: rgb(253, 255, 238);
+      text-align: center;
+      font-size: 2vw;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      margin: 5px;
+      transition: background-color 0.3s, border-color 0.3s;
+      font-size: 1.5vw !important;
+    }
+}
+
+@media (max-width: 431px) { 
+  .radio-group {
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* 항목 간 간격 조정 */
+    flex-wrap: wrap; /* 작은 화면에서는 줄바꿈 */
+  }
+
+  .radio-group label {
+    display: block !important;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    min-width: 200px;  /* 최소 너비를 가장 긴 텍스트 기준으로 설정 */
+    max-width: 250px;  /* 너무 길어지는 걸 방지 */
+    text-align: center;
+    flex-grow: 1; /* 동일한 너비로 확장 */
+  }
+
+  #submitButton {
+    width: 20% !important;
+    font-size: 3vw !important;
+  }
+
+  h1 {
+    color: rgb(255, 246, 246);
+    font-size: 6vw;
+    margin-bottom: 3px;
+  }
+
+  form {
+    height: auto !important;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #form7 {
+    margin-bottom: 30px !important;
+  }
+
+  span {
+    font-weight: bold;
+    color: rgb(254, 255, 247);
+    opacity: 0.7;
+    font-size: 2.5vw;
+  }
+
+  p {
+    font-weight: bold;
+    color: rgb(253, 255, 238);
+    text-align: center;
+    font-size: 3.5vw;
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s, border-color 0.3s;
+    font-size: 3vw !important;
+  }
+}

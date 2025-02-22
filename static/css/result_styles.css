@@ -1,0 +1,301 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  background-image: url('static/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(33, 4, 23, 0.8);
+  z-index: -1;
+}
+
+.container {
+  max-width: 90%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin: auto;
+}
+
+h1 {
+  color: rgb(255, 246, 246);
+  font-size: 2vw;
+  margin-bottom: 3px;
+}
+
+p {
+  font-weight: bold;
+  color: rgb(253, 255, 238);
+  text-align: center;
+  font-size: 1.2vw;
+  margin-bottom: 10px;
+  white-space: pre-line;
+}
+
+#wine-name {
+  font-size: 50px;
+  margin-top: 40px;
+}
+
+#wine-description {
+  margin-top: 50px;
+  line-height: 1.8;
+}
+
+#wine-image {
+  display: block;
+  margin: 20px auto;
+  max-width: 22%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 공유 버튼 */
+button {
+  font-weight: bold;
+  background-color: rgb(158, 0, 108);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2vw;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 7%;
+  max-width: 250px;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: rgb(219, 0, 150);
+}
+
+/* 공유 팝업 스타일 */
+.share-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.share-popup h2 {
+  margin: 10px 0;
+}
+
+#shareUrl {
+  border-radius: 10px;
+  background: #0f0f0f;
+  color: rgb(253, 255, 238);
+}
+
+#sharePopup {
+  background: #212121;
+  color: rgb(253, 255, 238);
+}
+
+.share-popup input {
+  width: 90%;
+  padding: 8px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.share-popup button {
+  width: auto;
+  margin: 5px;
+  font-size: 20px;
+}
+
+/* 팝업 배경 (모달 효과) */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.share-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* input과 버튼 사이 간격 */
+  width: 100%;
+}
+
+#shareUrl {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.share-input-container button {
+  white-space: nowrap; /* 버튼 글자가 줄바꿈되지 않도록 */
+  padding: 8px 12px;
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.share-input-container button:hover {
+  background-color: #3700b3;
+}
+
+/* 💻 1280px 이하 (노트북 & 작은 데스크탑) */
+@media (max-width: 1280px) {
+    .container {
+      max-width: 85%;
+      padding: 18px;
+    }
+  
+    h1 {
+      font-size: 2.5vw;
+    }
+  
+    p {
+      font-size: 1.6vw;
+    }
+  
+    button {
+      font-size: 1.5vw;
+      width: 10%;
+    }
+  
+    #wine-image {
+      max-width: 25%;
+    }
+  
+    .share-popup {
+      width: 350px;
+    }
+  }
+  
+/* 📱 1280px ~ 768px (태블릿 & 작은 노트북) */
+@media (max-width: 1024px) {
+    .container {
+      max-width: 80%;
+      padding: 15px;
+    }
+  
+    h1 {
+      font-size: 3vw;
+    }
+  
+    p {
+      font-size: 1.8vw;
+    }
+  
+    button {
+      font-size: 2vw;
+      width: 20%;
+    }
+  
+    #wine-image {
+      max-width: 30%;
+    }
+  
+    .share-popup {
+      width: 80%;
+    }
+  }  
+
+/* 📱 768px 이하 (태블릿 & 모바일) */
+@media (max-width: 768px) {
+    .container {
+      max-width: 100%;
+      padding: 15px;
+    }
+  
+    h1 {
+      font-size: 5vw;
+    }
+  
+    p {
+      font-size: 3.5vw;
+    }
+  
+    button {
+      font-size: 3vw;
+      width: 50%;
+    }
+  
+    #wine-image {
+      max-width: 60%;
+    }
+  
+    .share-popup {
+      width: 80%;
+    }
+  
+    .share-popup input {
+      width: 100%;
+    }
+  
+    .share-input-container {
+      flex-direction: column;
+    }
+  
+    .share-input-container button {
+      width: 100%;
+    }
+  }
+  
+  /* 📱 480px 이하 (작은 모바일 화면) */
+  @media (max-width: 480px) {
+    .container {
+      padding: 10px;
+      border-radius: 5px;
+    }
+  
+    h1 {
+      font-size: 6vw;
+    }
+  
+    p {
+      font-size: 4vw;
+    }
+  
+    button {
+      font-size: 4vw;
+      width: 70%;
+    }
+  
+    #wine-image {
+      max-width: 80%;
+    }
+  
+    .share-popup {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .share-input-container button {
+      font-size: 16px;
+    }
+  }
