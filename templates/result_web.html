@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      defer
+      src="{{ url_for('static', filename='result_web.js') }}"
+    ></script>
+    <!-- JS 파일을 분리하여 불러옴 -->
     <title>와인 추천 결과</title>
     <link
       rel="icon"
@@ -22,6 +27,7 @@
     <img id="wine-image" src="{{ wineData.image_url }}" alt="와인 이미지" />
 
     <button id="shareButton">🎈공유</button>
+    <button id="replayButton">🔁다시하기</button>
 
     <!-- 공유 팝업 -->
     <div class="popup-overlay" id="popupOverlay"></div>
@@ -34,51 +40,5 @@
       <button id="kakaoShareButton">💬 카카오톡 공유</button>
       <button onclick="closePopup()">❌</button>
     </div>
-
-    <script>
-      document
-        .getElementById('shareButton')
-        .addEventListener('click', function () {
-          document.getElementById('popupOverlay').style.display = 'block';
-          document.getElementById('sharePopup').style.display = 'block';
-
-          // 현재 URL 설정
-          document.getElementById('shareUrl').value = window.location.href;
-        });
-
-      function closePopup() {
-        document.getElementById('popupOverlay').style.display = 'none';
-        document.getElementById('sharePopup').style.display = 'none';
-      }
-
-      function copyUrl() {
-        var copyText = document.getElementById('shareUrl');
-        copyText.select();
-        document.execCommand('copy');
-        alert('URL이 복사되었습니다!');
-      }
-
-      // 카카오톡 공유 버튼 설정
-      Kakao.init('f917da4d87bab4b5f0df798f944b872c'); // 🔹 여기에 카카오 API 키 입력 (https://developers.kakao.com/)
-      document
-        .getElementById('kakaoShareButton')
-        .addEventListener('click', function () {
-          Kakao.Share.sendDefault({
-            objectType: 'feed',
-            content: {
-              title: '내가 선택한 와인 🍷',
-              description:
-                document.getElementById('wine-name').innerText +
-                '\n' +
-                document.getElementById('wine-description').innerText,
-              imageUrl: document.getElementById('wine-image').src,
-              link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href,
-              },
-            },
-          });
-        });
-    </script>
   </body>
 </html>
