@@ -8,6 +8,12 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 body::before {
@@ -51,7 +57,7 @@ p {
 }
 
 #wine-description {
-  margin-top: 50px;
+  margin-top: 35px;
   line-height: 1.8;
 }
 
@@ -74,13 +80,28 @@ button {
   font-size: 1.2vw;
   border-radius: 5px;
   cursor: pointer;
-  width: 10%;
+  width: 70%;
   max-width: 250px;
-  margin-top: 20px;
+  margin-right: 0px; /* 오른쪽 간격 추가 */
 }
 
 button:hover {
   background-color: rgb(219, 0, 150);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  gap: 15px; /* 버튼 사이 간격 */
+  margin-top: 20px;
+  padding: 5px 10px !important;
+  width: 20% !important;
+}
+
+.share-popup button {
+  width: auto;
+  margin: 5px;
+  font-size: 20px;
 }
 
 /* 공유 팝업 스타일 */
@@ -119,12 +140,6 @@ button:hover {
   padding: 8px;
   margin: 10px 0;
   text-align: center;
-}
-
-.share-popup button {
-  width: auto;
-  margin: 5px;
-  font-size: 20px;
 }
 
 /* 팝업 배경 (모달 효과) */

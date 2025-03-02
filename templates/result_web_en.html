@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      defer
+      src="{{ url_for('static', filename='result_web.js') }}"
+    ></script>
+    <!-- JS 파일을 분리하여 불러옴 -->
+    <title>Wine recommendation results</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/result_styles.css') }}"
+    />
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+  </head>
+  <body>
+    <p id="wine-name">🍷 {{ wineData.wine }}</p>
+    <p id="wine-description">{{ wineData.description }}</p>
+    <img id="wine-image" src="{{ wineData.image_url }}" alt="wine image" />
+
+    <div class="button-container">
+      <button id="shareButton">🎈Share</button>
+      <button id="replayButton">🔁replay</button>
+    </div>
+
+    <!-- 공유 팝업 -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="share-popup" id="sharePopup">
+      <h2>Share</h2>
+      <div class="share-input-container">
+        <input type="text" id="shareUrl" readonly />
+        <button onclick="copyUrl()">🔗</button>
+      </div>
+      <button id="kakaoShareButton">💬 KakaoTalk</button>
+      <button onclick="closePopup()">❌</button>
+    </div>
+  </body>
+</html>

@@ -42,7 +42,6 @@ document
     });
   });
 
-
 // 서버에서 개발 환경에 맞는 url 반환
 async function getApiBaseUrl() {
     const response = await fetch('/config'); // Flask 서버에서 API URL 가져옴

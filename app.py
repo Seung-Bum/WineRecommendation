@@ -1,34 +1,19 @@
-import os
-from flask import Flask, request, render_template, jsonify, session, redirect, url_for
-from managedWineData import recommend_wine, get_wineData
-from managedWineData import load_wine_data
+from flask import Flask, request, render_template, jsonify, session
+from managedWineData import recommend_wine, get_wineData, load_wine_data
 from decryptKey import decrypt_secret_key
-from dotenv import load_dotenv
 from flask_cors import CORS
-from config import config
+from config import config, server_config, get_lang_config
 
 app = Flask(__name__, static_folder="static")
 CORS(app)  # 다른 도메인에서 오는 요청을 Flask 서버가 허용할 수 있도록 설정하는 역할
-
-# .env 파일 로드
-load_dotenv()
-
-# 환경 변수 가져오기 (config.py)
-encrypted_secret_key = os.getenv("ENCRYPTED_SECRET_KEY")
-decryption_key = os.getenv("DECRYPTION_KEY")
+encrypted_secret_key, decryption_key, env, port = server_config()
 
 # 복호화한 SECRET_KEY 적용
 app.secret_key = decrypt_secret_key(encrypted_secret_key, decryption_key)
 # print(f" * Decrypted SECRET_KEY: {app.secret_key}")
 
-# 환경 변수에 따라 설정 적용 (.env의 FLASK_ENV에 따라 값 달라짐)
-# 기본값은 'production' (이 문장에서 FLASK_ENV가 환경변수를 가져오는 키)
-env = os.getenv("FLASK_ENV", "production")
 app.config.from_object(config[env])
 print(f" * FLASK_ENV: {env}")
-
-# 환경 변수에서 PORT 값 가져오기 (없으면 기본값 8080, 개발은 5000)
-port = int(os.environ.get("PORT", 8080))
 
 # WINE JSON 데이터 불러오기
 wine_recommendations = load_wine_data()
@@ -42,7 +27,9 @@ def get_config():
 
 @app.route('/')  # 메인페이지 이동
 def main_page():
-    return render_template("main_web.html")
+    # 언어별 web 페이지 경로 설정
+    lang_code = get_lang_config()
+    return render_template(f"main_web_{lang_code}.html")
 
 
 @app.route('/receiveData', methods=['POST'])  # 사용자 데이터를 받아서 취향 확인
@@ -74,12 +61,13 @@ def result_page():
     wineName = request.args.get('wineName', "No data available")
     print("result_page: " + wineName)
     wineData = get_wineData(wineName)
-
-    print("wineData: " + wineName)
+    print("get_wineData: " + wineName)
 
     session['response'] = wineData  # 세션에 저장
     userSession = session.get('response', "No data available")  # 세션에서 데이터 가져오기
-    return render_template("result_web.html", wineData=wineData, userSession=userSession)
+
+    lang_code = get_lang_config()
+    return render_template(f"result_web_{lang_code}.html", wineData=wineData, userSession=userSession)
 
 
 if __name__ == '__main__':

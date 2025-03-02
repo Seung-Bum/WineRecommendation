@@ -26,8 +26,10 @@
     <p id="wine-description">{{ wineData.description }}</p>
     <img id="wine-image" src="{{ wineData.image_url }}" alt="와인 이미지" />
 
-    <button id="shareButton">🎈공유</button>
-    <button id="replayButton">🔁다시하기</button>
+    <div class="button-container">
+      <button id="shareButton">🎈공유</button>
+      <button id="replayButton">🔁다시하기</button>
+    </div>
 
     <!-- 공유 팝업 -->
     <div class="popup-overlay" id="popupOverlay"></div>

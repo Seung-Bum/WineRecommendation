@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Find your wine taste</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="{{ url_for('static', filename='main_web.js') }}"></script>  <!-- JS 파일을 분리하여 불러옴 -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_styles.css') }}">
+  </head>
+  <body>
+    <h1>🍷 Find your wine taste</h1>
+    <span>Helps you find your custom wine</span>
+
+  <div class="form-container">
+    <form id="form1">
+      <p>1. taste related to fruit</p>
+      <div class="radio-group">
+        <label
+          ><input type="radio" name="fruit" value="strawberry" /> strawberry</label>
+        <label><input type="radio" name="fruit" value="apple" /> apple</label>
+        <label><input type="radio" name="fruit" value="cherry" /> cherry</label>
+        <label><input type="radio" name="fruit" value="blackberry" /> blackberry</label>
+        <label><input type="radio" name="fruit" value="plum" /> plum</label>
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form2">
+      <p>2. What kind of food do you usually like?</p>
+      <div class="radio-group">
+        <label><input type="radio" name="food" value="steak" /> steak</label>
+        <label><input type="radio" name="food" value="seafood" /> seafood</label>
+        <label><input type="radio" name="food" value="cheese" /> cheese</label>
+        <label><input type="radio" name="food" value="salad" /> salad</label>
+        <label><input type="radio" name="food" value="dessert" /> dessert</label>
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form3">
+      <p>
+        3. Do you like strong alcohol or light alcohol?
+      </p>
+      <div class="radio-group">
+        <label
+          ><input type="radio" name="proof" value="strong" /> strong alcohol</label
+        >
+        <label
+          ><input type="radio" name="proof" value="light" /> light alcohol</label
+        >
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form4">
+      <p>4. What kind of feeling are you looking for in wine?</p>
+      <div class="radio-group">
+        <label
+          ><input type="radio" name="feel" value="diversion" /> relaxation</label
+        >
+        <label
+          ><input type="radio" name="feel" value="special" /> special place</label
+        >
+        <label><input type="radio" name="feel" value="meal" /> meal supplement</label>
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form5">
+      <p>
+        5. Between rich, intense wines and soft, light wines <br> What appeals to you?
+      </p>
+      <div class="radio-group">
+        <label
+          ><input type="radio" name="texture" value="thick" /> thick and intense
+          wine</label
+        >
+        <label
+          ><input type="radio" name="texture" value="soft" /> 
+          soft and tender wine</label
+        >
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form6">
+      <p>6. What price range do you prefer when purchasing wine?</p>
+      <div class="radio-group">
+        <label
+          ><input type="radio" name="budget" value="daily" /> cheap everyday wine</label
+        >
+        <label
+          ><input type="radio" name="budget" value="commonly" /> reasonable price range</label
+        >
+        <label
+          ><input type="radio" name="budget" value="special" /> 
+          special day, fine wine</label
+        >
+      </div>
+    </form>
+  </div>
+  </br>
+
+  <div class="form-container">
+    <form id="form7">
+      <p>7. Wine flavor preference</p>
+      <div class="radio-group">
+        <label><input type="radio" name="smell" value="fruitsmell" /> fruity scent</label>
+        <label><input type="radio" name="smell" value="flower" /> flower scent</label>
+        <label><input type="radio" name="smell" value="wody" /> wood scent</label>
+        <label><input type="radio" name="smell" value="acrid" /> Spicy scent</label>
+      </div>
+    </form>
+  </div>
+  </br>
+    <button id="submitButton">submit</button>
+  </body>
+</html>

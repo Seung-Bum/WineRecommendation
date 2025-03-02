@@ -1,0 +1,30 @@
+{
+    "Riesling": {
+        "description": "리슬링은 감귤류와 핵과류 향이 나는 산뜻하고 향기로운 화이트 와인입니다. \n해산물, 매콤한 요리와 잘 어울립니다.",
+        "image_url": "/static/images/riesling.jpg"
+    },
+    "Merlot": {
+        "description": "메를로는 자두, 블랙체리, 바닐라 향이 나는 부드럽고 미디엄 바디감의 레드 와인입니다.",
+        "image_url": "/static/images/merlot.jpg"
+    },
+    "Cabernet Sauvignon": {
+        "description": "카베르네 소비뇽은 진한 과일 향과 탄탄한 탄닌으로 잘 알려진 대담하고 풀바디한 레드 와인입니다.",
+        "image_url": "/static/images/cabernet_sauvignon.jpg"
+    },
+    "Chardonnay": {
+        "description": "샤도네이는 풍부하고 \n버터향이 나며 참나무와 열대 과일 향이 나는 인기 있는 화이트 와인입니다.",
+        "image_url": "/static/images/chardonnay.jpg"
+    },
+    "Pinot Noir": {
+        "description": "피노 누아는 붉은 열매와 흙향의 우아한 풍미를 지닌 가벼운 바디감에서 미디엄 바디감의 레드 와인입니다.",
+        "image_url": "/static/images/pinot_noir.jpg"
+    },
+    "Sauvignon Blanc": {
+        "description": "\"녹색\" 허브 향과 짜릿한 산미로 사랑받는 인기 있는 확실한 화이트 와인입니다. \n소비뇽 블랑은 거의 모든 곳에서 자라기 때문에 다양한 스타일을 제공합니다.",
+        "image_url": "/static/images/sauvignon_blanc.jpg"
+    },
+    "Zinfandel": {
+        "description": "진판델 와인은 잼 같은 과일향과 스모키하고 이국적인 향신료 향으로 사랑받는 대담하고 과일향이 강한 레드 와인입니다. \n화이트 진판델이라는 달콤한 로제를 만들기도 합니다.",
+        "image_url": "/static/images/zinfandel.jpg"
+    }
+}
