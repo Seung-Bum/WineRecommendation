@@ -63,9 +63,8 @@ def recommand():
     wineName = recommend_wine(userData, wine_recommendations)
     print("recommand:", wineName)
 
-    # Flask에서 직접 리다이렉트 실행 (이전에는 JSON 응답만 했음)
     # return redirect(url_for('result_page', wineName=wineName))  # 직접 리다이렉트
-    # 🛠 wineName을 포함한 URL로 리디렉트 정보 반환
+    # 🛠 wineName을 포함한 URL로 리디렉트 정보 반환 (이전에는 JSON 응답만 했음)
     return jsonify({"redirect": f"/result?wineName={wineName}"})
 
 
