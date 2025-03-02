@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 20px;
     text-align: center;
-    background-image: url('/static/images/background.jpg') !important;
+    background-image: url('/static/images/background.jpg') !important; /* 새로고침시 배경이미지 안나오면 캐시 문제임*/
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

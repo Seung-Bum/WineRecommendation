@@ -17,9 +17,9 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
   </head>
   <body>
-    <p id="wine-name">🍷 {{ response.wine }}</p>
-    <p id="wine-description">{{ response.description }}</p>
-    <img id="wine-image" src="{{ response.image_url }}" alt="와인 이미지" />
+    <p id="wine-name">🍷 {{ wineData.wine }}</p>
+    <p id="wine-description">{{ wineData.description }}</p>
+    <img id="wine-image" src="{{ wineData.image_url }}" alt="와인 이미지" />
 
     <button id="shareButton">🎈공유</button>
 

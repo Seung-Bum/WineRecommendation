@@ -1,0 +1,30 @@
+{
+    "Riesling": {
+        "description": "Riesling is a crisp and aromatic white wine with notes of citrus and stone fruit. \nIt pairs well with seafood and spicy dishes.",
+        "image_url": "/static/images/riesling.jpg"
+    },
+    "Merlot": {
+        "description": "Merlot is a smooth and medium-bodied red wine with flavors of plum, black cherry, and vanilla.",
+        "image_url": "/static/images/merlot.jpg"
+    },
+    "Cabernet Sauvignon": {
+        "description": "Cabernet Sauvignon is a bold and full-bodied red wine known for its dark fruit flavors and firm tannins.",
+        "image_url": "/static/images/cabernet_sauvignon.jpg"
+    },
+    "Chardonnay": {
+        "description": "Chardonnay is a popular white wine with rich, \nbuttery flavors and hints of oak and tropical fruit.",
+        "image_url": "/static/images/chardonnay.jpg"
+    },
+    "Pinot Noir": {
+        "description": "Pinot Noir is a light to medium-bodied red wine with elegant flavors of red berries and earthy notes.",
+        "image_url": "/static/images/pinot_noir.jpg"
+    },
+    "Sauvignon Blanc": {
+        "description": "A popular and unmistakable white wine that’s loved for its “green” herbal flavors and racy acidity. \nSauvignon Blanc grows nearly everywhere and, thus, offers a variety of styles ranging from lean to bountiful.",
+        "image_url": "/static/images/sauvignon_blanc.jpg"
+    },
+    "Zinfandel": {
+        "description": "Zinfandel wine is a bold, fruit-forward red loved for its jammy fruit and smoky, exotic spice notes. \nIt’s also made into a sweet rosé called White Zinfandel.",
+        "image_url": "/static/images/zinfandel.jpg"
+    }
+}

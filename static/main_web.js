@@ -10,20 +10,20 @@
         });
       });
 
-      console.log('수집된 데이터:', data);
+    console.log('수집된 데이터:', data);
 
       // 서버에서 개발 환경에 맞는 url 반환
-      async function getApiBaseUrl() {
+    async function getApiBaseUrl() {
         const response = await fetch('/config'); // Flask 서버에서 API URL 가져옴
         const data = await response.json(); // JSON 데이터 파싱
         return data.api_base_url; // API URL 반환
-      }
+    }
 
     // 서버로 데이터 전송 메서드
     async function sendData(data) {
       try {
-          const API_BASE_URL = await getApiBaseUrl(); // API URL 가져오기
-          const url = API_BASE_URL + "/recommend"; // 올바른 URL 생성
+          const API_BASE_URL = await getApiBaseUrl(); // 실행 환경에 따른 API URL 가져오기
+          const url = API_BASE_URL + "/receiveData"; // URL 생성
   
           const response = await fetch(url, {
               method: 'POST',
@@ -34,7 +34,13 @@
           });
   
           if (response.ok) {
-              window.location.href = "/result"; // 성공하면 result.html 페이지로 이동
+              //console.log(response.text);
+             //window.location.href = "/result"; // 성공하면 result.html 페이지로 이동
+              const responseData = await response.json();
+              if (responseData.redirect) {
+                  window.location.href = responseData.redirect; // wine 포함된 URL로 이동
+              }
+              
           } else {
               const errorData = await response.json();
               if (errorData && errorData.error) {
