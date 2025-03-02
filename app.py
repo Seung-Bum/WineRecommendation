@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, request, render_template, jsonify, session
 from managedWineData import recommend_wine, get_wineData, load_wine_data
 from decryptKey import decrypt_secret_key
