@@ -9,7 +9,7 @@ class Config:
 
 
 class ProductionConfig(Config):
-    API_BASE_URL = "http://124.51.107.175:8080"
+    API_BASE_URL = "http://124.51.107.175:5001"
 
 
 class DevelopmentConfig(Config):
@@ -39,8 +39,8 @@ def server_config():
     encrypted_secret_key = os.getenv("ENCRYPTED_SECRET_KEY")
     decryption_key = os.getenv("DECRYPTION_KEY")
 
-    # 환경 변수에서 PORT 값 가져오기 (없으면 기본값 8080, 개발은 5000)
-    port = int(os.environ.get("PORT", 8080))
+    # 환경 변수에서 PORT 값 가져오기 (없으면 기본값 5001, 개발은 5000)
+    port = int(os.environ.get("PORT", 5001))
 
     # 환경 변수에 따라 설정 적용 (.env의 FLASK_ENV에 따라 값 달라짐)
     # 기본값은 'production' (이 문장에서 FLASK_ENV가 환경변수를 가져오는 키)
