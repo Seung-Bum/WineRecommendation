@@ -50,8 +50,9 @@ document.getElementById("instaShareButton").addEventListener("click", function (
 
   if (navigator.clipboard && location.protocol === 'https:') {
       navigator.clipboard.writeText(currentPageUrl).then(() => {
-          showToast("링크가 복사되었습니다!"); // 토스트 메시지 표시
-          openInstagram(userAgent);
+          showToast("링크가 복사되었습니다! 인스타그램으로 이동하시겠습니까?", () => {
+              openInstagram(userAgent);
+          });
       }).catch(err => {
           console.error("클립보드 복사 실패:", err);
           fallbackCopy(currentPageUrl);
@@ -70,8 +71,9 @@ function fallbackCopy(text) {
   try {
       const successful = document.execCommand('copy');
       if (successful) {
-          showToast("링크가 복사되었습니다!"); // 토스트 메시지 표시
-          openInstagram(navigator.userAgent.toLowerCase());
+          showToast("링크가 복사되었습니다! 인스타그램으로 이동하시겠습니까?", () => {
+              openInstagram(navigator.userAgent.toLowerCase());
+          });
       } else {
           alert("직접 복사해주세요.");
       }
@@ -87,7 +89,6 @@ function openInstagram(userAgent) {
       window.location.href = "intent://instagram.com#Intent;scheme=https;package=com.instagram.android;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.instagram.android;end;";
   } else if (/iphone|ipad|ipod/.test(userAgent)) {
       if (navigator.userAgent.match(/safari/i) && !navigator.userAgent.match(/chrome|chromium|crios/i)) {
-          // Safari 브라우저에서 인스타그램 앱 실행 시도 후 실패 시 App Store로 이동
           window.location.href = "instagram://app";
           setTimeout(() => {
               if (window.location.href.startsWith("instagram://")) {
@@ -100,30 +101,49 @@ function openInstagram(userAgent) {
               alert("인스타그램 앱이 설치되지 않은 것 같습니다. App Store에서 설치 후 다시 시도하세요.");
           }, 2000);
       }
-
   } else {
       window.open("https://www.instagram.com/", "_blank");
   }
 }
 
-function showToast(message) {
+function showToast(message, confirmCallback) {
   const toast = document.createElement("div");
-  toast.textContent = message;
   toast.style.cssText = `
-    position: fixed;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    z-index: 999999; /* 매우 높은 z-index 값 설정 */
+      position: fixed;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      z-index: 999999;
+      display: flex;
+      align-items: center;
   `;
-  document.body.appendChild(toast);
-  setTimeout(() => {
+
+  const messageSpan = document.createElement("span");
+  messageSpan.textContent = message;
+  toast.appendChild(messageSpan);
+
+  const confirmButton = document.createElement("button");
+  confirmButton.textContent = "확인";
+  confirmButton.style.cssText = `
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      margin-left: 10px;
+      cursor: pointer;
+  `;
+  confirmButton.addEventListener("click", () => {
+      confirmCallback();
       toast.remove();
-  }, 5000); // 5초 동안 표시
+  });
+  toast.appendChild(confirmButton);
+
+  document.body.appendChild(toast);
 }
 
 
