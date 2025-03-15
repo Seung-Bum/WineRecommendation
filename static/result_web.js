@@ -45,31 +45,59 @@ document
 
 // 인스타그램 공유하기 버튼 설정
 document.getElementById("instaShareButton").addEventListener("click", function () {
-  const currentPageUrl = window.location.href; // 현재 페이지 URL 가져오기
-  const userAgent = navigator.userAgent.toLowerCase(); // 사용자 에이전트 확인
+  const currentPageUrl = window.location.href;
+  const userAgent = navigator.userAgent.toLowerCase();
 
-  // 클립보드에 URL 복사
-  navigator.clipboard.writeText(currentPageUrl).then(() => {
-      alert("현재 페이지 링크가 복사되었습니다! 인스타그램에 직접 붙여넣어 공유하세요.");
-
-      if (/android/.test(userAgent)) {
-          // Android: 인스타그램 앱 실행 (없으면 Play Store로 이동)
-          window.location.href = "intent://instagram.com#Intent;scheme=https;package=com.instagram.android;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.instagram.android;end;";
-      } else if (/iphone|ipad|ipod/.test(userAgent)) {
-          // iOS: 인스타그램 앱 실행 (앱이 없으면 경고창)
-          window.location.href = "instagram://app";
-          setTimeout(() => {
-              alert("인스타그램 앱이 설치되지 않은 것 같습니다. App Store에서 설치 후 다시 시도하세요.");
-          }, 2000);
-      } else {
-          // PC 환경: 인스타그램 웹사이트로 이동
-          window.open("https://www.instagram.com/", "_blank");
-      }
-  }).catch(err => {
-      console.error("클립보드 복사 실패:", err);
-      alert("클립보드 복사에 실패했습니다. 직접 복사해주세요.");
-  });
+  // 클립보드 API 지원 여부 확인
+  if (navigator.clipboard && window.isSecureContext) {
+      // HTTPS 환경 및 클립보드 API 지원
+      navigator.clipboard.writeText(currentPageUrl).then(() => {
+          alert("현재 페이지 링크가 복사되었습니다! 인스타그램에 직접 붙여넣어 공유하세요.");
+          openInstagram(userAgent);
+      }).catch(err => {
+          console.error("클립보드 복사 실패:", err);
+          fallbackCopy(currentPageUrl);
+      });
+  } else {
+      // 클립보드 API 미지원 또는 HTTP 환경
+      fallbackCopy(currentPageUrl);
+  }
 });
+
+function fallbackCopy(text) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+      const successful = document.execCommand('copy');
+      if(successful){
+          alert("현재 페이지 링크가 복사되었습니다! 인스타그램에 직접 붙여넣어 공유하세요.");
+          openInstagram(navigator.userAgent.toLowerCase());
+      } else {
+          alert("직접 복사해주세요.");
+      }
+
+  } catch (err) {
+      console.error('복사 실패:', err);
+      alert("직접 복사해주세요.");
+  }
+  document.body.removeChild(textArea);
+}
+
+function openInstagram(userAgent) {
+  if (/android/.test(userAgent)) {
+      window.location.href = "intent://instagram.com#Intent;scheme=https;package=com.instagram.android;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.instagram.android;end;";
+  } else if (/iphone|ipad|ipod/.test(userAgent)) {
+      window.location.href = "instagram://app";
+      setTimeout(() => {
+          alert("인스타그램 앱이 설치되지 않은 것 같습니다. App Store에서 설치 후 다시 시도하세요.");
+      }, 2000);
+  } else {
+      window.open("https://www.instagram.com/", "_blank");
+  }
+}
 
 
 // 페이스북 공유하기 버튼 설정
