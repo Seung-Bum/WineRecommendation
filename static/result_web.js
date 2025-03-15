@@ -48,18 +48,15 @@ document.getElementById("instaShareButton").addEventListener("click", function (
   const currentPageUrl = window.location.href;
   const userAgent = navigator.userAgent.toLowerCase();
 
-  // 클립보드 API 지원 여부 확인
-  if (navigator.clipboard && window.isSecureContext) {
-      // HTTPS 환경 및 클립보드 API 지원
+  if (navigator.clipboard && location.protocol === 'https:') {
       navigator.clipboard.writeText(currentPageUrl).then(() => {
-          alert("현재 페이지 링크가 복사되었습니다! 인스타그램에 직접 붙여넣어 공유하세요.");
+          showToast("링크가 복사되었습니다!"); // 토스트 메시지 표시
           openInstagram(userAgent);
       }).catch(err => {
           console.error("클립보드 복사 실패:", err);
           fallbackCopy(currentPageUrl);
       });
   } else {
-      // 클립보드 API 미지원 또는 HTTP 환경
       fallbackCopy(currentPageUrl);
   }
 });
@@ -72,13 +69,12 @@ function fallbackCopy(text) {
   textArea.select();
   try {
       const successful = document.execCommand('copy');
-      if(successful){
-          alert("현재 페이지 링크가 복사되었습니다! 인스타그램에 직접 붙여넣어 공유하세요.");
+      if (successful) {
+          showToast("링크가 복사되었습니다!"); // 토스트 메시지 표시
           openInstagram(navigator.userAgent.toLowerCase());
       } else {
           alert("직접 복사해주세요.");
       }
-
   } catch (err) {
       console.error('복사 실패:', err);
       alert("직접 복사해주세요.");
@@ -90,35 +86,73 @@ function openInstagram(userAgent) {
   if (/android/.test(userAgent)) {
       window.location.href = "intent://instagram.com#Intent;scheme=https;package=com.instagram.android;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.instagram.android;end;";
   } else if (/iphone|ipad|ipod/.test(userAgent)) {
-      window.location.href = "instagram://app";
-      setTimeout(() => {
-          alert("인스타그램 앱이 설치되지 않은 것 같습니다. App Store에서 설치 후 다시 시도하세요.");
-      }, 2000);
+      if (navigator.userAgent.match(/safari/i) && !navigator.userAgent.match(/chrome|chromium|crios/i)) {
+          // Safari 브라우저에서 인스타그램 앱 실행 시도 후 실패 시 App Store로 이동
+          window.location.href = "instagram://app";
+          setTimeout(() => {
+              if (window.location.href.startsWith("instagram://")) {
+                  window.location.href = "https://apps.apple.com/app/instagram/id389801252";
+              }
+          }, 2000);
+      } else {
+          window.location.href = "instagram://app";
+          setTimeout(() => {
+              alert("인스타그램 앱이 설치되지 않은 것 같습니다. App Store에서 설치 후 다시 시도하세요.");
+          }, 2000);
+      }
+
   } else {
       window.open("https://www.instagram.com/", "_blank");
   }
+}
+
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.textContent = message;
+  toast.style.cssText = `
+      position: fixed;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      z-index: 9999;
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+      toast.remove();
+  }, 2000);
 }
 
 
 // 페이스북 공유하기 버튼 설정
 document.getElementById("facebookShareButton").addEventListener("click", function () {
   const currentPageUrl = window.location.href;
-  //const currentPageUrl = encodeURIComponent(window.location.href); // 현재 페이지 URL 가져오기 (인코딩)
-  const userAgent = navigator.userAgent.toLowerCase(); // 사용자 환경 감지
+  const userAgent = navigator.userAgent.toLowerCase();
 
   console.log('currentPageUrl: ' + currentPageUrl);
 
   if (/android|iphone|ipad|ipod/.test(userAgent)) {
-      // 모바일 환경: 페이스북 앱 실행 (없으면 웹 공유 페이지로 이동)
-      const fbAppUrl = `fb://facewebmodal/f?href=${currentPageUrl}`;
+      // 모바일 환경: 페이스북 앱 실행 시도
+      const fbAppUrl = `fb://share?u=${currentPageUrl}`;
       window.location.href = fbAppUrl;
 
+      // 앱 실행 실패 시 웹 공유 페이지로 이동
       setTimeout(() => {
-          // 앱이 없을 경우 웹 공유 페이지로 이동
+          if (userAgent.includes('android')) {
+              // Android: 앱 설치 여부 확인 및 Play Store 이동
+              window.location.href = `https://play.google.com/store/apps/details?id=com.facebook.katana&hl=ko`;
+          } else if (userAgent.includes('iphone') || userAgent.includes('ipad') || userAgent.includes('ipod')) {
+              // iOS: 앱 설치 여부 확인 및 App Store 이동
+              window.location.href = `https://apps.apple.com/kr/app/facebook/id284882215`;
+          }
+
           window.location.href = `https://www.facebook.com/sharer/sharer.php?u=${currentPageUrl}`;
-      }, 2000);
+      }, 1000); // 1초 후 웹 공유 페이지로 이동
   } else {
-      // PC 환경: 새 창에서 페이스북 공유 페이지 열기 (운영환경에서만 활용됨)
+      // PC 환경: 새 창에서 페이스북 공유 페이지 열기
       window.open(`https://www.facebook.com/sharer/sharer.php?u=${currentPageUrl}`, "_blank");
   }
 });
