@@ -123,7 +123,7 @@ function showToast(message) {
   document.body.appendChild(toast);
   setTimeout(() => {
       toast.remove();
-  }, 2000);
+  }, 5000); // 5초 동안 표시
 }
 
 

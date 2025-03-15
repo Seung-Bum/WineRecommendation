@@ -234,8 +234,9 @@ button:hover {
 }
 
 #kakaoShareButton img {
-    width: 70%;
+    width: 90%;
     height: auto;
+    border-radius: 50%;
 }
 
 #instaShareButton img {
