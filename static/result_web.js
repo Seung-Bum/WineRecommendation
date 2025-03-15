@@ -143,22 +143,25 @@ document.getElementById("facebookShareButton").addEventListener("click", functio
   console.log('currentPageUrl: ' + currentPageUrl);
 
   if (/android|iphone|ipad|ipod/.test(userAgent)) {
-      // 모바일 환경: 페이스북 앱 실행 시도
-      const fbAppUrl = `fb://share?u=${currentPageUrl}`;
-      window.location.href = fbAppUrl;
+      // 모바일 환경: 토스트 메시지 표시
+      showToast("페이스북으로 이동하시겠습니까?", () => {
+          // 페이스북 앱 실행 시도
+          const fbAppUrl = `fb://share?u=${currentPageUrl}`;
+          window.location.href = fbAppUrl;
 
-      // 앱 실행 실패 시 웹 공유 페이지로 이동
-      setTimeout(() => {
-          if (userAgent.includes('android')) {
-              // Android: 앱 설치 여부 확인 및 Play Store 이동
-              window.location.href = `https://play.google.com/store/apps/details?id=com.facebook.katana&hl=ko`;
-          } else if (userAgent.includes('iphone') || userAgent.includes('ipad') || userAgent.includes('ipod')) {
-              // iOS: 앱 설치 여부 확인 및 App Store 이동
-              window.location.href = `https://apps.apple.com/kr/app/facebook/id284882215`;
-          }
+          // 앱 실행 실패 시 웹 공유 페이지로 이동
+          setTimeout(() => {
+              if (userAgent.includes('android')) {
+                  // Android: 앱 설치 여부 확인 및 Play Store 이동
+                  window.location.href = `https://play.google.com/store/apps/details?id=com.facebook.katana&hl=ko`;
+              } else if (userAgent.includes('iphone') || userAgent.includes('ipad') || userAgent.includes('ipod')) {
+                  // iOS: 앱 설치 여부 확인 및 App Store 이동
+                  window.location.href = `https://apps.apple.com/kr/app/facebook/id284882215`;
+              }
 
-          window.location.href = `https://www.facebook.com/sharer/sharer.php?u=${currentPageUrl}`;
-      }, 1000); // 1초 후 웹 공유 페이지로 이동
+              window.location.href = `https://www.facebook.com/sharer/sharer.php?u=${currentPageUrl}`;
+          }, 1000); // 1초 후 웹 공유 페이지로 이동
+      });
   } else {
       // PC 환경: 새 창에서 페이스북 공유 페이지 열기
       window.open(`https://www.facebook.com/sharer/sharer.php?u=${currentPageUrl}`, "_blank");
