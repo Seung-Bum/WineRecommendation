@@ -144,7 +144,7 @@ document.getElementById("facebookShareButton").addEventListener("click", functio
 
   if (/android|iphone|ipad|ipod/.test(userAgent)) {
       // 모바일 환경: 토스트 메시지 표시
-      showToast("페이스북으로 이동하시겠습니까?", () => {
+      showToast("페이스북으로 이동하시겠습니까? (링크가 복사되었습니다.)", () => {
           // 페이스북 앱 실행 시도
           const fbAppUrl = `fb://share?u=${currentPageUrl}`;
           window.location.href = fbAppUrl;
