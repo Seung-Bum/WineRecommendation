@@ -221,7 +221,7 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
+    border: none !important;
     cursor: pointer;
     padding: 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -233,10 +233,9 @@ button:hover {
 }
 
 #kakaoShareButton img {
-    width: 90%;
-    height: auto;
-    border-radius: 50%;
-    /*background-color: #FEE500;  카카오는 노란색 */
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
 }
 
 #instaShareButton img {

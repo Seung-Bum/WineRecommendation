@@ -50,7 +50,7 @@ document.getElementById("instaShareButton").addEventListener("click", function (
 
   if (navigator.clipboard && location.protocol === 'https:') {
       navigator.clipboard.writeText(currentPageUrl).then(() => {
-          showToast("링크가 복사되었습니다! 인스타그램으로 이동하시겠습니까?", () => {
+          showToast("링크가 복사되었습니다! (눌러주세요)", () => {
               openInstagram(userAgent);
           });
       }).catch(err => {
@@ -71,7 +71,7 @@ function fallbackCopy(text) {
   try {
       const successful = document.execCommand('copy');
       if (successful) {
-          showToast("링크가 복사되었습니다! 인스타그램으로 이동하시겠습니까?", () => {
+          showToast("링크가 복사되었습니다! (눌러주세요)", () => {
               openInstagram(navigator.userAgent.toLowerCase());
           });
       } else {
@@ -126,22 +126,10 @@ function showToast(message, confirmCallback) {
   messageSpan.textContent = message;
   toast.appendChild(messageSpan);
 
-  const confirmButton = document.createElement("button");
-  confirmButton.textContent = "확인";
-  confirmButton.style.cssText = `
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 3px;
-      margin-left: 10px;
-      cursor: pointer;
-  `;
-  confirmButton.addEventListener("click", () => {
+  messageSpan.addEventListener("click", () => {
       confirmCallback();
       toast.remove();
   });
-  toast.appendChild(confirmButton);
 
   document.body.appendChild(toast);
 }
