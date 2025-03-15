@@ -110,15 +110,15 @@ function showToast(message) {
   const toast = document.createElement("div");
   toast.textContent = message;
   toast.style.cssText = `
-      position: fixed;
-      bottom: 50px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      z-index: 9999;
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 999999; /* 매우 높은 z-index 값 설정 */
   `;
   document.body.appendChild(toast);
   setTimeout(() => {
