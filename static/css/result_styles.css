@@ -102,11 +102,16 @@ button:hover {
   width: auto;
   margin: 5px;
   font-size: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 수평 중앙 정렬 */
+  justify-content: center; /* 수직 중앙 정렬 */
 }
 
 /* 공유 팝업 스타일 */
 .share-popup {
-  display: none;
+  display: none; /* 여기를 block으로 두는 것이 중요 */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -118,6 +123,22 @@ button:hover {
   width: 300px;
   text-align: center;
   z-index: 1000;
+}
+
+.share-popup .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px; /* 크기를 적절히 조정 */
+  height: 40px;
+  margin-top: 15px; /* 팝업 내용과 간격 조정 */
 }
 
 .share-popup h2 {
@@ -180,6 +201,64 @@ button:hover {
 
 .share-input-container button:hover {
   background-color: #3700b3;
+}
+
+.social-buttons {
+  display: flex;
+  /*flex-direction: column;  버튼들을 세로로 정렬 */
+  align-items: center; /* 가운데 정렬 */
+  gap: 15px; /* 버튼 사이 간격 (기존 10px에서 15px로 조정) */
+  margin-bottom: 15px; /* 아래쪽 여백 추가 */
+}
+
+#kakaoShareButton,
+#facebookShareButton,
+#XShareButton,
+#instaShareButton {
+    width: 50px; /* 버튼 크기 */
+    height: 50px;
+    background-color: #FEE500; /* 카카오는 노란색 */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+#instaShareButton {
+    background-color: #E4405F; /* 인스타그램 색상 */
+}
+
+#kakaoShareButton img {
+    width: 70%;
+    height: auto;
+}
+
+#instaShareButton img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+#facebookShareButton img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  background-color: #1877F2; /* 페이스북 공식 색상 */
+  border: 0.3px solid #1877F2; /* 테두리 색상 추가 */
+}
+
+#XShareButton img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* 이미지 비율 유지하면서 채우기 */
+  border-radius: 50%;
+  background-color: #000000;
+  border: 0.3px solid #000000; /* 테두리 색상 추가 */
 }
 
 /* 💻 1280px 이하 (노트북 & 작은 데스크탑) */
@@ -305,10 +384,16 @@ button:hover {
       padding: 5px 10px !important;
       width: 60% !important;
     }
+
+    #copyButton {
+      width: 23% !important;
+      margin-top: 5px !important;
+      margin-bottom: 20px !important;
+    }
   }
   
-  /* 📱 480px 이하 (작은 모바일 화면) */
-  @media (max-width: 480px) {
+/* 📱 480px 이하 (작은 모바일 화면) */
+@media (max-width: 480px) {
     .container {
       padding: 10px;
       border-radius: 5px;
@@ -348,4 +433,12 @@ button:hover {
       padding: 5px 10px !important;
       width: 80% !important;
     }
+
+    #copyButton {
+      width: 28% !important;
+      margin-top: 5px !important;
+      margin-bottom: 20px !important;
+    }
   }
+
+

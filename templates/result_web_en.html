@@ -28,19 +28,36 @@
 
     <div class="button-container">
       <button id="shareButton">🎈Share</button>
-      <button id="replayButton">🔁replay</button>
+      <button id="replayButton">🔁Replay</button>
     </div>
 
     <!-- 공유 팝업 -->
     <div class="popup-overlay" id="popupOverlay"></div>
     <div class="share-popup" id="sharePopup">
-      <h2>Share</h2>
-      <div class="share-input-container">
-        <input type="text" id="shareUrl" readonly />
-        <button onclick="copyUrl()">🔗</button>
+      <div class="content">
+        <h2>Share Result</h2>
+        <div class="share-input-container">
+          <input type="text" id="shareUrl" readonly />
+          <button id="copyButton" onclick="copyUrl()">🔗</button>
+        </div>
+
+        <div class="social-buttons">
+          <button id="kakaoShareButton">
+            <img src="/static/images/kakao-icon.png" />
+          </button>
+          <button id="instaShareButton">
+            <img src="/static/images/instagram-icon.png" />
+          </button>
+          <button id="facebookShareButton">
+            <img src="/static/images/facebook-icon.png" />
+          </button>
+          <button id="XShareButton">
+            <img src="/static/images/X-icon.png" />
+          </button>
+        </div>
+
+        <button id="closeButton" onclick="closePopup()">❌</button>
       </div>
-      <button id="kakaoShareButton">💬 KakaoTalk</button>
-      <button onclick="closePopup()">❌</button>
     </div>
   </body>
 </html>

@@ -34,13 +34,30 @@
     <!-- 공유 팝업 -->
     <div class="popup-overlay" id="popupOverlay"></div>
     <div class="share-popup" id="sharePopup">
-      <h2>공유하기</h2>
-      <div class="share-input-container">
-        <input type="text" id="shareUrl" readonly />
-        <button onclick="copyUrl()">🔗</button>
+      <div class="content">
+        <h2>공유하기</h2>
+        <div class="share-input-container">
+          <input type="text" id="shareUrl" readonly />
+          <button id="copyButton" onclick="copyUrl()">🔗</button>
+        </div>
+
+        <div class="social-buttons">
+          <button id="kakaoShareButton">
+            <img src="/static/images/kakao-icon.png" />
+          </button>
+          <button id="instaShareButton">
+            <img src="/static/images/instagram-icon.png" />
+          </button>
+          <button id="facebookShareButton">
+            <img src="/static/images/facebook-icon.png" />
+          </button>
+          <button id="XShareButton">
+            <img src="/static/images/X-icon.png" />
+          </button>
+        </div>
+
+        <button id="closeButton" onclick="closePopup()">❌</button>
       </div>
-      <button id="kakaoShareButton">💬 카카오톡 공유</button>
-      <button onclick="closePopup()">❌</button>
     </div>
   </body>
 </html>
