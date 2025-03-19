@@ -50,7 +50,7 @@ document.getElementById("instaShareButton").addEventListener("click", function (
 
   if (navigator.clipboard && location.protocol === 'https:') {
       navigator.clipboard.writeText(currentPageUrl).then(() => {
-          showToast("링크가 복사되었습니다! (눌러주세요)", () => {
+          showToast("링크가 복사되었습니다! (클릭시 이동)", () => {
               openInstagram(userAgent);
           });
       }).catch(err => {
@@ -71,7 +71,7 @@ function fallbackCopy(text) {
   try {
       const successful = document.execCommand('copy');
       if (successful) {
-          showToast("링크가 복사되었습니다! (눌러주세요)", () => {
+          showToast("링크가 복사되었습니다! (클릭시 이동)", () => {
               openInstagram(navigator.userAgent.toLowerCase());
           });
       } else {
@@ -144,7 +144,7 @@ document.getElementById("facebookShareButton").addEventListener("click", functio
 
   if (/android|iphone|ipad|ipod/.test(userAgent)) {
       // 모바일 환경: 토스트 메시지 표시
-      showToast("페이스북으로 이동하시겠습니까? (링크가 복사되었습니다.)", () => {
+      showToast("링크가 복사되었습니다! (클릭시 이동)", () => {
           // 페이스북 앱 실행 시도
           const fbAppUrl = `fb://share?u=${currentPageUrl}`;
           window.location.href = fbAppUrl;
