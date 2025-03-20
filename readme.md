@@ -85,7 +85,7 @@ cd WineRecommendation
 
 ### 2️⃣ Nginx 설정
 
-`/etc/nginx/sites-available/default` 또는 별도의 설정 파일을 수정하여 Nginx Reverse Proxy를 설정합니다.
+`/etc/nginx/sites-available/default` 또는 별도의 설정 파일을 수정하여 Nginx Reverse Proxy를 설정합니다. (필요에 따라 포트포워딩 설정 진행)
 
 ```nginx
 server {
@@ -110,5 +110,5 @@ sudo systemctl restart nginx
 ### 3️⃣ Flask 서비스 실행 (백그라운드 실행)
 
 ```bash
-nohup python3 app.py &
+python3 app.py
 ```
