@@ -28,6 +28,11 @@ def serve_static_html(filename):
     return send_from_directory(os.getcwd(), f"{filename}.html")
 
 
+@app.route('/robots.txt')  # robots.txt 서빙
+def robots():
+    return send_from_directory(os.getcwd(), 'robots.txt')
+
+
 @app.route("/config")  # 클라이언트에서 요청시에 현재 환경 리턴
 def get_config():
     return jsonify({"api_base_url": app.config["API_BASE_URL"]})
