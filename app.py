@@ -4,6 +4,8 @@ from managedWineData import recommend_wine, get_wineData, load_wine_data
 from decryptKey import decrypt_secret_key
 from flask_cors import CORS
 from config import config, server_config, get_lang_config
+from flask import send_from_directory
+import os
 
 app = Flask(__name__, static_folder="static")
 CORS(app)  # 다른 도메인에서 오는 요청을 Flask 서버가 허용할 수 있도록 설정하는 역할
@@ -19,6 +21,11 @@ print(f" * FLASK_ENV: {env}")
 # WINE JSON 데이터 불러오기
 wine_recommendations = load_wine_data()
 print(" * Wine Data load complated:", len(wine_recommendations))
+
+
+@app.route('/<filename>.html')  # 루트 경로에서 HTML 파일 제공
+def serve_static_html(filename):
+    return send_from_directory(os.getcwd(), f"{filename}.html")
 
 
 @app.route("/config")  # 클라이언트에서 요청시에 현재 환경 리턴
