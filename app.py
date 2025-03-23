@@ -33,6 +33,11 @@ def robots():
     return send_from_directory(os.getcwd(), 'robots.txt')
 
 
+@app.route('/sitemap.xml')  # sitemap.xml 서빙
+def sitemap():
+    return send_from_directory(os.getcwd(), 'sitemap.xml')
+
+
 @app.route("/config")  # 클라이언트에서 요청시에 현재 환경 리턴
 def get_config():
     return jsonify({"api_base_url": app.config["API_BASE_URL"]})
