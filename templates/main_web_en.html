@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Find your wine taste</title>
+    <title>Wine Recommendation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!-- SEO 최적화를 위한 메타 태그 -->
+      <meta name="description" content="Get recommendations for wines that suit your taste! We help even beginners make easy choices.">
+      <meta name="keywords" content="Wine recommendations, wine recommendations for beginners, red wine recommendations, white wine recommendations, cost-effective wines">
+      <meta name="author" content="WineRecommendationTeam">
+      
+      <!-- SNS 공유를 위한 Open Graph 태그 (페이스북, 카카오톡 등) -->
+      <meta property="og:title" content="Wine Recommendation">
+      <meta property="og:description" content="Get recommendations for wines that suit your taste!">
+      <meta property="og:image" content="http://winerecommendation.store/static/images/thumbnail.jpg">
+      <meta property="og:url" content="http://winerecommendation.store/">
+  
+      <!-- Twitter 공유 태그 -->
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="Wine Recommendation">
+      <meta name="twitter:description" content="Get recommendations for wines that suit your taste!">
+      <meta name="twitter:image" content="http://winerecommendation.store/static/images/thumbnail.jpg">
+
     <script defer src="{{ url_for('static', filename='main_web.js') }}"></script>  <!-- JS 파일을 분리하여 불러옴 -->
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main_styles.css') }}">
   </head>
   <body>
-    <h1>🍷 Find your wine taste</h1>
+    <h1>🍷 Wine Recommendation</h1>
     <span>Helps you find your custom wine</span>
 
   <div class="form-container">
