@@ -1,7 +1,22 @@
     document.getElementById('submitButton').addEventListener('click', () => {
+      event.preventDefault(); // 기본 제출 동작 방지
+
       // 모든 폼 데이터 수집
       const forms = document.querySelectorAll('form');
+      let isValid = true; // 유효성 검사 플래그
       const data = {};
+
+      forms.forEach((form) => {
+        const checkedRadio = form.querySelector("input[type='radio']:checked");
+        if (!checkedRadio) {
+            isValid = false; // 하나라도 선택되지 않은 form이 있으면 false
+        }
+      });
+
+      if (!isValid) {
+        alert("Please select all items!"); // 경고 메시지 출력
+        return; // 여기서 함수 종료 (다음 스텝 진행 방지)
+      }
 
       forms.forEach((form) => {
         const inputs = form.querySelectorAll('input[type="radio"]:checked');
