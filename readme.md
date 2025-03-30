@@ -2,6 +2,7 @@
 
 ## 📌 프로젝트 개요
 
+- **URL**: http://winerecommendation.store/
 - **프로젝트 이름**: [**WineRecommendation**](https://github.com/Seung-Bum/WineRecommendation)
 - **설명**: 개인의 취향에 맞는 와인을 추천하고, 추천된 와인을 공유할 수 있는 웹 애플리케이션
 
