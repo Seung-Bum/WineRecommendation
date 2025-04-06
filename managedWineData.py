@@ -25,6 +25,35 @@ def recommend_wine(user_data, wine_recommendations):
     return None  # 조건에 맞는 와인이 없으면 None 반환
 
 
+def recommend_wine_by_tags(selected_tags, wine_recommendations):
+    print("recommend_strict_match_wines 시작")
+
+    matched_wines = []
+    seen_wines = set()  # 중복 제거용
+
+    for recommendation in wine_recommendations:
+        try:
+            condition_values = recommendation["conditions"].values()
+
+            if all(tag in condition_values for tag in selected_tags):
+                wine_name = recommendation["wine"]
+
+                if wine_name not in seen_wines:
+                    recommendation["description"] = {
+                        "name": recommendation["wine"],
+                        "description": recommendation["description"]["description"],
+                        "image_url": recommendation["description"]["image_url"]
+                    }
+                    matched_wines.append(
+                        recommendation["description"])  # 전체 정보 추가
+                    seen_wines.add(wine_name)   # 중복 체크
+
+        except Exception as e:
+            print(f"Error while matching tags strictly: {e}")
+
+    return matched_wines
+
+
 def get_wineData(wine):
     print("get_wineData: " + wine)
     wine_desc_json = get_Json_WineDesc()
@@ -40,13 +69,15 @@ def get_wineData(wine):
     # 데이터가 정상적으로 존재하면 반환
     return {
         "wine": wine,
-        "description": wine_info.get("description", "다시 선택 해주세요"),  # 기본값 제공
+        # 기본값 제공
+        "description": wine_info.get("description", "다시 선택 해주세요"),
         # 기본 이미지 제공
         "image_url": wine_info.get("image_url", "/static/images/empty.jpg"),
     }
 
 
 def load_wine_data():
+    # 서버 시작시에 가져옴
     # print("load_wine_data 시작")
 
     try:

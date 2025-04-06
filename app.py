@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, request, render_template, jsonify, session
-from managedWineData import recommend_wine, get_wineData, load_wine_data
+from flask import Flask, request, render_template, jsonify, session, Response
+from managedWineData import recommend_wine, get_wineData, load_wine_data, recommend_wine_by_tags
+from managedJsonFile import get_Json_WineDesc
 from decryptKey import decrypt_secret_key
 from flask_cors import CORS
 from config import config, server_config, get_lang_config
 from flask import send_from_directory
 import os
+import json
 
 app = Flask(__name__, static_folder="static")
 CORS(app)  # 다른 도메인에서 오는 요청을 Flask 서버가 허용할 수 있도록 설정하는 역할
@@ -45,9 +47,41 @@ def get_config():
 
 @app.route('/')  # 메인페이지 이동
 def main_page():
+    return render_template("main.html")
+
+
+@app.route('/finder')  # 태그 찾기
+def finder_page():
+    return render_template("finder.html")
+
+
+@app.route('/character')
+def character_page():
     # 언어별 web 페이지 경로 설정
     lang_code = get_lang_config()
     return render_template(f"main_web_{lang_code}.html")
+
+
+@app.route('/getWineData', methods=['GET'])
+def get_wine_data():
+    tags_param = request.args.get('tags')
+
+    if tags_param:
+        selected_tags = tags_param.split(",")
+        # 선택된 태그가 모두 포함된 와인만 필터링
+        filtered_wines = recommend_wine_by_tags(
+            selected_tags, wine_recommendations)
+
+        # for wine in filtered_wines:
+        #    print(f"추천 와인: {wine}")
+    else:
+        data = get_Json_WineDesc()  # UTF-8로 읽었음 (태그 선택 없을시 전체 반환)
+        json_str = json.dumps(data, ensure_ascii=False)  # 한글 깨짐 방지
+        return Response(json_str, content_type='application/json; charset=utf-8')
+
+    # 리스트를 딕셔너리로 변환 (프론트에서 Object.values(data) 사용 중이라서)
+    response_data = {str(i): wine for i, wine in enumerate(filtered_wines)}
+    return jsonify(response_data)
 
 
 @app.route('/receiveData', methods=['POST'])  # 사용자 데이터를 받아서 취향 확인

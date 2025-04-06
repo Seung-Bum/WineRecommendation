@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>태그검색 - 와인 추천</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="{{ url_for('static', filename='finder.js') }}"></script>  <!-- JS 파일을 분리하여 불러옴 -->
+  </head>
+  <body class="bg-white text-gray-900">
+    <!-- 상단 내비게이션 -->
+    <nav class="flex items-center justify-between px-6 py-4 border-b">
+      <div class="flex items-center space-x-6">
+        <span class="text-2xl font-black text-gray-800">WINE</span>
+        <a
+          href="http://localhost:5000/finder"
+          class="text-xs text-indigo-600 font-semibold"
+          >태그검색</a
+        >
+        <a href="#" class="text-xs text-gray-600 hover:text-indigo-600"
+          >오늘의 추천</a
+        >
+        <a href="#" class="text-xs text-gray-600 hover:text-indigo-600"
+          >멤버십</a
+        >
+        <a
+          href="http://localhost:5000/character"
+          class="text-xs text-gray-600 hover:text-indigo-600"
+          >나의 취향 찾기</a
+        >
+      </div>
+      <div class="flex items-center space-x-4">
+        <button>🔍</button>
+        <a href="#" class="text-sm text-gray-600">로그인/가입</a>
+      </div>
+    </nav>
+
+    <!-- 메인 섹션 -->
+    <main class="max-w-7xl mx-auto p-6">
+      <h1 class="text-2xl font-bold mb-4">태그검색</h1>
+
+      <div class="grid grid-cols-12 gap-6">
+        <!-- 왼쪽 필터 영역 -->
+        <aside class="col-span-3">
+          <div class="mb-4">
+            <label class="flex items-center space-x-2">
+              <input
+                type="radio"
+                name="viewOption"
+                value="map"
+                checked
+                class="accent-indigo-600"
+              />
+              <span>목록 보기</span>
+            </label>
+            <label class="flex items-center space-x-2 mt-2">
+              <input
+                type="radio"
+                name="viewOption"
+                value="list"
+                class="accent-indigo-600"
+              />
+              <span>지도 보기</span>
+            </label>
+          </div>
+
+          <div class="border-t pt-4">
+            <h2 class="font-semibold mb-2">태그</h2>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" class="accent-indigo-600" />
+              <span>fruitsmell</span>
+            </label>
+            <label class="flex items-center space-x-2 mt-2">
+              <input type="checkbox" class="accent-indigo-600" />
+              <span>화이트</span>
+            </label>
+            <label class="flex items-center space-x-2 mt-2">
+              <input type="checkbox" class="accent-indigo-600" />
+              <span>스파클링</span>
+            </label>
+            <label class="flex items-center space-x-2 mt-2">
+              <input type="checkbox" class="accent-indigo-600" />
+              <span>스파클링</span>
+            </label>
+            <label class="flex items-center space-x-2 mt-2">
+              <input type="checkbox" class="accent-indigo-600" />
+              <span>스파클링</span>
+            </label>
+            <label class="flex items-center space-x-2 mt-2">
+              <input type="checkbox" class="accent-indigo-600" />
+              <span>스파클링</span>
+            </label>
+            <label class="flex items-center space-x-2 mt-2">
+              <input type="checkbox" class="accent-indigo-600" />
+              <span>스파클링</span>
+            </label>
+            <label class="flex items-center space-x-2 mt-2">
+              <input type="checkbox" class="accent-indigo-600" />
+              <span>스파클링</span>
+            </label>
+            <!--<button class="mt-2 text-sm text-gray-500 hover:text-indigo-600">
+              더 보기 &gt;
+            </button>-->
+          </div>
+        </aside>
+
+        <!-- 오른쪽 콘텐츠 영역 -->
+        <section class="col-span-9">
+          <div class="flex items-center justify-between mb-4">
+            <span id="wine-count" class="text-sm text-gray-500">
+                총 0개의 와인이 검색되었어요!
+            </span>
+            <div class="flex items-center gap-4">
+              <button class="text-sm text-gray-500 hover:text-indigo-600">
+                전체 초기화
+              </button>
+              <div class="relative">
+                <select class="border text-sm px-2 py-1 rounded">
+                  <option>인기순</option>
+                  <option>최신순</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- 오른쪽 콘텐츠 영역 안 wine card 리스트 위치 -->
+          <div id="wine-list" class="grid grid-cols-4 gap-6"></div>
+
+          <!-- 와인 카드 리스트 
+          <div class="grid grid-cols-3 gap-6">
+            <div class="text-center">
+              <img
+                src="https://via.placeholder.com/300x180"
+                class="rounded shadow-sm mb-2 w-full object-cover"
+              />
+              <p class="text-sm">샤또 마고 2015</p>
+            </div>
+            <div class="text-center">
+              <img
+                src="https://via.placeholder.com/300x180"
+                class="rounded shadow-sm mb-2 w-full object-cover"
+              />
+              <p class="text-sm">(더비) 나파밸리 카버넷</p>
+            </div>
+            <div class="text-center">
+              <img
+                src="https://via.placeholder.com/300x180"
+                class="rounded shadow-sm mb-2 w-full object-cover"
+              />
+              <p class="text-sm">(한정) 모엣샹동 아이스</p>
+            </div>-->
+            <!-- 카드 더 추가 가능 -->
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
